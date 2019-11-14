@@ -1,0 +1,38 @@
+{
+  "name": "yotpo",
+  "vendor": "vtex",
+  "version": "0.0.1",
+  "title": "Yotpo Integration",
+  "description": "Integration of Yotpo reviews widget and conversion tracking",
+  "billingOptions": {
+    "termsURL": "",
+    "support": {
+      "url": "https://support.vtex.com/hc/requests"
+    },
+    "free": true
+  },
+  "builders": {
+    "react": "3.x",
+    "store": "0.x",
+    "pixel": "0.x",
+    "docs": "0.x"
+  },
+  "dependencies": {
+    "vtex.pixel-interfaces": "1.x",
+    "vtex.product-review-interfaces": "1.x",
+    "vtex.product-summary": "2.x",
+    "vtex.product-context": "0.x"
+  },
+  "settingsSchema": {
+    "title": "Yotpo",
+    "type": "object",
+    "properties": {
+      "appKey": {
+        "title": "Yotpo App Key",
+        "description": "Enter your App Key from the Yotpo Admin",
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
+}

@@ -1,0 +1,20 @@
+<script>
+  (function() {
+    var appKey = "{{settings.appKey}}";
+    if (!appKey) {
+      console.error(
+        "Warning: No Yotpo app key is defined. Please configure it in the apps admin."
+      );
+      return;
+    }
+
+    (function e() {
+      var e = document.createElement("script");
+      (e.type = "text/javascript"),
+        (e.async = true),
+        (e.src = "//staticw2.yotpo.com/" + appKey + "/widget.js");
+      var t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t);
+    })();
+  })();
+</script>

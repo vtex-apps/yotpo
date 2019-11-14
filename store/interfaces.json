@@ -1,0 +1,14 @@
+{
+  "pixel.yotpo": {
+    "component": "index"
+  },
+  "product-reviews.yotpo": {
+    "component": "Reviews"
+  },
+  "product-rating-summary.yotpo": {
+    "component": "RatingSummary"
+  },
+  "product-rating-inline.yotpo": {
+    "component": "RatingInline"
+  }
+}
