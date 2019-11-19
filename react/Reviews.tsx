@@ -18,7 +18,7 @@ const Reviews: FunctionComponent<BlockClass> = props => {
   const baseClassNames = generateBlockClass(styles.reviewsContainer, blockClass)
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.initWidgets()
+    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
   }, [])
 
   if (!product) return null

@@ -1,7 +1,7 @@
 {
   "name": "yotpo",
   "vendor": "vtex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "title": "Yotpo Integration",
   "description": "Integration of Yotpo reviews widget and conversion tracking",
   "billingOptions": {

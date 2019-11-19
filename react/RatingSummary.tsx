@@ -21,7 +21,7 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
   )
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.initWidgets()
+    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
   }, [])
 
   if (!product) return null
