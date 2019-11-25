@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2019-11-25
+
+### Changed
+
+- Removed billing options from manifest, which requires a new major version
+
 ## [0.0.2] - 2019-11-19
 
 ### Fixed

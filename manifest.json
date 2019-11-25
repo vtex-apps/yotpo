@@ -1,16 +1,9 @@
 {
   "name": "yotpo",
   "vendor": "vtex",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "title": "Yotpo Integration",
   "description": "Integration of Yotpo reviews widget and conversion tracking",
-  "billingOptions": {
-    "termsURL": "",
-    "support": {
-      "url": "https://support.vtex.com/hc/requests"
-    },
-    "free": true
-  },
   "builders": {
     "react": "3.x",
     "store": "0.x",
