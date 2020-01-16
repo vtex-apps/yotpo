@@ -6,6 +6,7 @@ declare module 'vtex.product-context' {
   }
 
   export interface Product {
+    productReference?: string
     productId: string
     productName: string
     items: any

@@ -3,6 +3,10 @@ import { canUseDOM } from 'vtex.render-runtime'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
 import styles from './styles.css'
+import { useQuery } from 'react-apollo'
+import Settings from './graphql/Settings.graphql'
+import { Spinner } from 'vtex.styleguide'
+
 
 declare var global: {
   __hostname__: string
@@ -52,17 +56,36 @@ const Reviews: FunctionComponent<BlockClass> = props => {
     image = undefined
   }
 
-  return (
-    <div
-      className={`${baseClassNames} yotpo yotpo-main-widget`}
-      data-product-id={product.productId}
-      data-price={price || ''}
-      data-currency="USD"
-      data-name={product.productName}
-      data-url={encodeURI('https://' + host + '/' + product.linkText + '/p')}
-      data-image-url={image ? encodeURI(image) : ''}
-    ></div>
-  )
+  const { loading, error, data } = useQuery(Settings)
+  if (loading) {
+    return (
+      <div className="mv5 flex justify-center" style={{ minHeight: 800 }}>
+        <Spinner />
+      </div>
+    )
+  } 
+  else if (error) {
+    return (
+      
+      <div className="ph5" style={{ minHeight: 800 }}>
+        Error! {error.message}
+      </div>
+    )
+  }
+  else{
+    let useRefIdSetting = JSON.parse(data?.appSettings?.message)
+    return (
+      <div
+        className={`${baseClassNames} yotpo yotpo-main-widget`}
+        data-product-id={useRefIdSetting?.useRefId ? product.productReference : product.productId}
+        data-price={price || ''}
+        data-currency="USD"
+        data-name={product.productName}
+        data-url={encodeURI('https://' + host + '/' + product.linkText + '/p')}
+        data-image-url={image ? encodeURI(image) : ''}
+      ></div>
+    )
+  }
 }
 
 export default Reviews

@@ -155,6 +155,7 @@ interface Product {
   brand: string
   categoryId?: string // inconsistency
   categories: string[]
+  productReference?: string
   productId: string
   productName: string
   selectedSku?: string // inconsistency
