@@ -14,7 +14,9 @@
     "vtex.pixel-interfaces": "1.x",
     "vtex.product-review-interfaces": "1.x",
     "vtex.product-summary": "2.x",
-    "vtex.product-context": "0.x"
+    "vtex.product-context": "0.x",
+    "vtex.apps-graphql": "2.x",
+    "vtex.styleguide": "9.x"
   },
   "settingsSchema": {
     "title": "Yotpo",
@@ -24,6 +26,11 @@
         "title": "Yotpo App Key",
         "description": "Enter your App Key from the Yotpo Admin",
         "type": "string"
+      },
+      "useRefId": {
+        "title": "Use Reference Id",
+        "description": "Use reference Id rather than product id to link reviews to products",
+        "type": "boolean"
       }
     }
   },

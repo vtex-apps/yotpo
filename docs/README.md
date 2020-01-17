@@ -17,6 +17,7 @@ The Yotpo Reviews Integration app is a product review and rating integration wit
 
 ![setup-yotpo](https://user-images.githubusercontent.com/6306265/71126932-016f6c80-21b8-11ea-9af5-7f6da2b3ad9b.png)
 - **Yotpo App Key**: Enter the app key that you have received from Yotpo's admin interface.
+- **Use Reference Id**: Check this box if you wish to use the product's reference id rather than its product id to link the product to its reviews.
 
  :warning: This app fills the standard VTEX review blocks with content using abstract interfaces from  `vtex.product-review-interfaces` . The **VTEX review blocks** are:
 

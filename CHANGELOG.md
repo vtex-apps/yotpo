@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- added new app setting to allow choice of either product id or product reference id for pulling up yotpo reviews
+
 ## [1.0.1] - 2019-12-19
 
 ### Added
