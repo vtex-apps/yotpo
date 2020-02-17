@@ -2,6 +2,8 @@ import React, { FunctionComponent, useContext, useEffect } from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
+import { useQuery } from 'react-apollo'
+import Settings from './graphql/Settings.graphql'
 import styles from './styles.css'
 
 declare var global: {
@@ -14,6 +16,7 @@ declare var yotpo: any
 const RatingSummary: FunctionComponent<BlockClass> = props => {
   const { blockClass } = props
   const { product }: ProductContext = useContext(ProductContext)
+  const { data } = useQuery(Settings)
 
   const baseClassNames = generateBlockClass(
     styles.ratingSummaryContainer,
@@ -22,7 +25,9 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
-  }, [])
+  }, [yotpo, product, data])
+
+  let useRefIdSetting = data?.appSettings?.message ? JSON.parse(data.appSettings.message) : null
 
   if (!product) return null
 
@@ -58,7 +63,7 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
   return (
     <div
       className={`${baseClassNames} mv2 yotpo bottomLine`}
-      data-product-id={product.productId}
+      data-product-id={useRefIdSetting?.useRefId ? product.productReference : product.productId}
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}
