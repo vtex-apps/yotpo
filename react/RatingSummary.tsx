@@ -25,7 +25,7 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
-  }, [yotpo, product, data])
+  }, [product, data])
 
   let useRefIdSetting = data?.appSettings?.message ? JSON.parse(data.appSettings.message) : null
 

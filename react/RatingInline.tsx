@@ -25,9 +25,11 @@ const RatingInline: FunctionComponent<BlockClass> = props => {
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
-  }, [yotpo, product, data])
+  }, [product, data])
 
-  let useRefIdSetting = data?.appSettings?.message ? JSON.parse(data.appSettings.message) : null
+  let useRefIdSetting = data?.appSettings?.message
+    ? JSON.parse(data.appSettings.message)
+    : null
 
   if (!product) return null
 
@@ -63,7 +65,9 @@ const RatingInline: FunctionComponent<BlockClass> = props => {
   return (
     <div
       className={`${baseClassNames} center yotpo bottomLine`}
-      data-product-id={useRefIdSetting?.useRefId ? product.productReference : product.productId}
+      data-product-id={
+        useRefIdSetting?.useRefId ? product.productReference : product.productId
+      }
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}

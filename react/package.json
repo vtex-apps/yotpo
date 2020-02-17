@@ -30,7 +30,7 @@
     "@vtex/test-tools": "^0.2.0",
     "eslint": "^5.16.0",
     "eslint-config-vtex-react": "^4.1.0",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "vtex.apps-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.apps-graphql@2.5.0/public/@types/vtex.apps-graphql",
     "vtex.pixel-interfaces": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-interfaces@1.1.1/public/_types/react",
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.7.1/public/@types/vtex.product-context",

@@ -6,7 +6,6 @@ import styles from './styles.css'
 import { useQuery } from 'react-apollo'
 import Settings from './graphql/Settings.graphql'
 
-
 declare var global: {
   __hostname__: string
   __pathname__: string
@@ -22,9 +21,11 @@ const Reviews: FunctionComponent<BlockClass> = props => {
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
-  }, [yotpo, product, data])
+  }, [product, data])
 
-  let useRefIdSetting = data?.appSettings?.message ? JSON.parse(data.appSettings.message) : null
+  let useRefIdSetting = data?.appSettings?.message
+    ? JSON.parse(data.appSettings.message)
+    : null
 
   if (!product) return null
 
@@ -60,7 +61,9 @@ const Reviews: FunctionComponent<BlockClass> = props => {
   return (
     <div
       className={`${baseClassNames} yotpo yotpo-main-widget`}
-      data-product-id={useRefIdSetting?.useRefId ? product.productReference : product.productId}
+      data-product-id={
+        useRefIdSetting?.useRefId ? product.productReference : product.productId
+      }
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}
@@ -69,6 +72,5 @@ const Reviews: FunctionComponent<BlockClass> = props => {
     ></div>
   )
 }
-
 
 export default Reviews
