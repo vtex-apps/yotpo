@@ -24,12 +24,17 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
   )
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
+    if (typeof yotpo != 'undefined' && yotpo.initialized && product && data)
+      setTimeout(function() {
+        yotpo.refreshWidgets()
+      }, 1000)
   }, [product, data])
 
-  let useRefIdSetting = data?.appSettings?.message ? JSON.parse(data.appSettings.message) : null
+  let useRefIdSetting = data?.appSettings?.message
+    ? JSON.parse(data.appSettings.message)
+    : null
 
-  if (!product) return null
+  if (!product || !data) return null
 
   const getLocation = () =>
     canUseDOM
@@ -63,7 +68,9 @@ const RatingSummary: FunctionComponent<BlockClass> = props => {
   return (
     <div
       className={`${baseClassNames} mv2 yotpo bottomLine`}
-      data-product-id={useRefIdSetting?.useRefId ? product.productReference : product.productId}
+      data-product-id={
+        useRefIdSetting?.useRefId ? product.productReference : product.productId
+      }
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}

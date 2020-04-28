@@ -20,14 +20,17 @@ const Reviews: FunctionComponent<BlockClass> = props => {
   const baseClassNames = generateBlockClass(styles.reviewsContainer, blockClass)
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized) yotpo.refreshWidgets()
+    if (typeof yotpo != 'undefined' && yotpo.initialized && product && data)
+      setTimeout(function() {
+        yotpo.refreshWidgets()
+      }, 1000)
   }, [product, data])
 
   let useRefIdSetting = data?.appSettings?.message
     ? JSON.parse(data.appSettings.message)
     : null
 
-  if (!product) return null
+  if (!product || !data) return null
 
   const getLocation = () =>
     canUseDOM
