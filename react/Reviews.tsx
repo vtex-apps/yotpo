@@ -16,7 +16,7 @@ declare var yotpo: any
 const Reviews: FunctionComponent<BlockClass> = props => {
   const { blockClass } = props
   const { product }: ProductContext = useContext(ProductContext)
-  const { data } = useQuery(Settings)
+  const { data } = useQuery(Settings, { ssr: false })
   const baseClassNames = generateBlockClass(styles.reviewsContainer, blockClass)
 
   useEffect(() => {
