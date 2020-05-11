@@ -17,7 +17,7 @@ declare var yotpo: any
 const RatingInline: FunctionComponent<BlockClass> = props => {
   const { blockClass } = props
   const { product }: ProductContext = useContext(ProductSummaryContext)
-  const { data } = useQuery(Settings)
+  const { data } = useQuery(Settings, { ssr: false })
   const baseClassNames = generateBlockClass(
     styles.ratingInlineContainer,
     blockClass
