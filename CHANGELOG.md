@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Changed the way components render
+
 ## [1.1.3] - 2020-05-11
 ### Fixed
 - Stop doing private queries on SSR and avoid breaking SSR.
