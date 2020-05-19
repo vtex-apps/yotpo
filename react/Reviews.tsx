@@ -11,7 +11,8 @@ declare var global: {
 
 declare var yotpo: any
 
-const Reviews: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
+const Reviews: FunctionComponent<BlockClass> = (props: any) => {
+  const { blockClass } = props
   const { product }: ProductContext = useContext(ProductContext)
   const baseClassNames = generateBlockClass(styles.reviewsContainer, blockClass)
 

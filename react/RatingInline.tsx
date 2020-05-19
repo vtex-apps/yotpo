@@ -12,7 +12,8 @@ declare var global: {
 
 declare var yotpo: any
 
-const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
+const RatingInline: FunctionComponent<BlockClass> = (props: any) => {
+  const { blockClass } = props
   const { product }: ProductContext = useContext(ProductSummaryContext)
   const baseClassNames = generateBlockClass(
     styles.ratingInlineContainer,
