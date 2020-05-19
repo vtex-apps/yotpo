@@ -1,6 +1,8 @@
 <script>
   (function() {
     var appKey = "{{settings.appKey}}";
+    window.yotpo = window.yotpo || {};
+    window.yotpo.useRefIdSetting = "{{settings.useRefId}}";
     if (!appKey) {
       console.error(
         "Warning: No Yotpo app key is defined. Please configure it in the apps admin."

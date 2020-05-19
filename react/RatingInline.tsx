@@ -3,8 +3,6 @@ import { canUseDOM } from 'vtex.render-runtime'
 import { ProductSummaryContext } from 'vtex.product-summary'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
-import { useQuery } from 'react-apollo'
-import Settings from './graphql/Settings.graphql'
 import styles from './styles.css'
 
 declare var global: {
@@ -14,27 +12,23 @@ declare var global: {
 
 declare var yotpo: any
 
-const RatingInline: FunctionComponent<BlockClass> = props => {
-  const { blockClass } = props
+const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
   const { product }: ProductContext = useContext(ProductSummaryContext)
-  const { data } = useQuery(Settings, { ssr: false })
   const baseClassNames = generateBlockClass(
     styles.ratingInlineContainer,
     blockClass
   )
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized && product && data)
+    if (typeof yotpo != 'undefined' && yotpo.initialized && product)
       setTimeout(function() {
         yotpo.refreshWidgets()
       }, 1000)
-  }, [product, data])
+  }, [product])
 
-  let useRefIdSetting = data?.appSettings?.message
-    ? JSON.parse(data.appSettings.message)
+  let useRefIdSetting = window?.yotpo?.useRefIdSetting
+    ? JSON.parse(window.yotpo.useRefIdSetting)
     : null
-
-  if (!product || !data) return null
 
   const getLocation = () =>
     canUseDOM
