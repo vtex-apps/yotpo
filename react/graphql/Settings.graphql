@@ -1,6 +1,0 @@
-query Settings {
-  appSettings(app: "vtex.yotpo", version: "1.x") 
-  {
-    message
-  }
-}
