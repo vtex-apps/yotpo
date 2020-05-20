@@ -64,7 +64,7 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     <div
       className={`${baseClassNames} mv2 yotpo bottomLine`}
       data-product-id={
-        useRefIdSetting?.useRefId ? product.productReference : product.productId
+        useRefIdSetting ? product.productReference : product.productId
       }
       data-price={price || ''}
       data-currency="USD"

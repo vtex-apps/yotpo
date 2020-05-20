@@ -65,7 +65,7 @@ const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     <div
       className={`${baseClassNames} center yotpo bottomLine`}
       data-product-id={
-        useRefIdSetting?.useRefId ? product.productReference : product.productId
+        useRefIdSetting ? product.productReference : product.productId
       }
       data-price={price || ''}
       data-currency="USD"
