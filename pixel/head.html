@@ -1,4 +1,4 @@
-<link rel="preload" href="//staticw2.yotpo.com/{{settings.appKey}}/widget.js" as="script" crossorigin>
+<!-- <link rel="preload" href="//staticw2.yotpo.com/{{settings.appKey}}/widget.js" as="script" crossorigin> -->
 
 <script>
   (function() {
@@ -12,13 +12,14 @@
       return;
     }
 
-    (function e() {
-      var e = document.createElement("script");
-      (e.type = "text/javascript"),
-        (e.async = true),
-        (e.src = "//staticw2.yotpo.com/" + appKey + "/widget.js");
-      var t = document.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(e, t);
-    })();
+    // (function e() {
+    //   var e = document.createElement("script");
+    //   (e.type = "text/javascript"),
+    //     (e.async = true),
+    //     (e.src = "//staticw2.yotpo.com/" + appKey + "/widget.js");
+    //   var t = document.getElementsByTagName("script")[0];
+    //   t.parentNode.insertBefore(e, t);
+    // })();
   })();
 </script>
+<script type="text/javascript" async="" src="//staticw2.yotpo.com/{{settings.appKey}}/widget.js" crossorigin></script>

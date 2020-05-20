@@ -25,6 +25,8 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
       }, 1000)
   }, [product])
 
+  if (!product) return null
+
   let useRefIdSetting = window?.yotpoApp?.useRefIdSetting
     ? JSON.parse(window.yotpoApp.useRefIdSetting)
     : null
