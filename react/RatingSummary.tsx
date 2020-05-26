@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useContext, useEffect } from 'react'
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
@@ -8,8 +13,13 @@ declare var global: {
   __hostname__: string
   __pathname__: string
 }
-
 declare var yotpo: any
+
+window.loading = new Promise(function(resolve) {
+  setTimeout(function() {
+    resolve()
+  }, 100)
+})
 
 const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
   const { product }: ProductContext = useContext(ProductContext)
@@ -17,6 +27,7 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     styles.ratingSummaryContainer,
     blockClass
   )
+  const [useRefId, setUseRefId] = useState(false)
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized && product)
@@ -24,13 +35,16 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
         yotpo.refreshWidgets()
       }, 1000)
   }, [product])
-
+  useEffect(() => {
+    window.loading.then(() => {
+      setUseRefId(
+        window?.yotpoApp?.useRefIdSetting
+          ? JSON.parse(window.yotpoApp.useRefIdSetting)
+          : false
+      )
+    })
+  }, [])
   if (!product) return null
-
-  let useRefIdSetting = window?.yotpoApp?.useRefIdSetting
-    ? JSON.parse(window.yotpoApp.useRefIdSetting)
-    : null
-
   const getLocation = () =>
     canUseDOM
       ? {
@@ -43,29 +57,23 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
           pathName: global.__pathname__,
           host: global.__hostname__,
         }
-
   const { host } = getLocation()
-
   let price
   try {
     price = product.items[0].sellers[0].commertialOffer.Price
   } catch {
     price = undefined
   }
-
   let image
   try {
     image = product.items[0].images[0].imageUrl
   } catch {
     image = undefined
   }
-
   return (
     <div
       className={`${baseClassNames} mv2 yotpo bottomLine`}
-      data-product-id={
-        useRefIdSetting ? product.productReference : product.productId
-      }
+      data-product-id={useRefId ? product.productReference : product.productId}
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}
@@ -74,5 +82,4 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     ></div>
   )
 }
-
 export default RatingSummary

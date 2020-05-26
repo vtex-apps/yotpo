@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useContext, useEffect } from 'react'
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductSummaryContext } from 'vtex.product-summary'
 import { ProductContext } from 'vtex.product-context'
@@ -18,6 +23,7 @@ const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     styles.ratingInlineContainer,
     blockClass
   )
+  const [useRefId, setUseRefId] = useState(false)
 
   useEffect(() => {
     if (typeof yotpo != 'undefined' && yotpo.initialized && product)
@@ -26,11 +32,17 @@ const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
       }, 1000)
   }, [product])
 
-  if (!product) return null
+  useEffect(() => {
+    window.loading.then(() => {
+      setUseRefId(
+        window?.yotpoApp?.useRefIdSetting
+          ? JSON.parse(window.yotpoApp.useRefIdSetting)
+          : false
+      )
+    })
+  }, [])
 
-  let useRefIdSetting = window?.yotpoApp?.useRefIdSetting
-    ? JSON.parse(window.yotpoApp.useRefIdSetting)
-    : null
+  if (!product) return null
 
   const getLocation = () =>
     canUseDOM
@@ -64,9 +76,7 @@ const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
   return (
     <div
       className={`${baseClassNames} center yotpo bottomLine`}
-      data-product-id={
-        useRefIdSetting ? product.productReference : product.productId
-      }
+      data-product-id={useRefId ? product.productReference : product.productId}
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}
