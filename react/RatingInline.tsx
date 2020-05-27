@@ -17,6 +17,12 @@ declare var global: {
 
 declare var yotpo: any
 
+window.loading = new Promise(function(resolve) {
+  setTimeout(function() {
+    resolve()
+  }, 100)
+})
+
 const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
   const { product }: ProductContext = useContext(ProductSummaryContext)
   const baseClassNames = generateBlockClass(
