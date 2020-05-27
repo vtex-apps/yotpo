@@ -1,10 +1,13 @@
-import React, { FunctionComponent, useContext, useEffect } from 'react'
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductSummaryContext } from 'vtex.product-summary'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
-import { useQuery } from 'react-apollo'
-import Settings from './graphql/Settings.graphql'
 import styles from './styles.css'
 
 declare var global: {
@@ -14,27 +17,38 @@ declare var global: {
 
 declare var yotpo: any
 
-const RatingInline: FunctionComponent<BlockClass> = props => {
-  const { blockClass } = props
+window.loading = new Promise(function(resolve) {
+  setTimeout(function() {
+    resolve()
+  }, 100)
+})
+
+const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
   const { product }: ProductContext = useContext(ProductSummaryContext)
-  const { data } = useQuery(Settings, { ssr: false })
   const baseClassNames = generateBlockClass(
     styles.ratingInlineContainer,
     blockClass
   )
+  const [useRefId, setUseRefId] = useState(false)
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized && product && data)
+    if (typeof yotpo != 'undefined' && yotpo.initialized && product)
       setTimeout(function() {
         yotpo.refreshWidgets()
       }, 1000)
-  }, [product, data])
+  }, [product])
 
-  let useRefIdSetting = data?.appSettings?.message
-    ? JSON.parse(data.appSettings.message)
-    : null
+  useEffect(() => {
+    window.loading.then(() => {
+      setUseRefId(
+        window?.yotpoApp?.useRefIdSetting
+          ? JSON.parse(window.yotpoApp.useRefIdSetting)
+          : false
+      )
+    })
+  }, [])
 
-  if (!product || !data) return null
+  if (!product) return null
 
   const getLocation = () =>
     canUseDOM
@@ -68,9 +82,7 @@ const RatingInline: FunctionComponent<BlockClass> = props => {
   return (
     <div
       className={`${baseClassNames} center yotpo bottomLine`}
-      data-product-id={
-        useRefIdSetting?.useRefId ? product.productReference : product.productId
-      }
+      data-product-id={useRefId ? product.productReference : product.productId}
       data-price={price || ''}
       data-currency="USD"
       data-name={product.productName}

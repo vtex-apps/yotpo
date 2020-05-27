@@ -4,6 +4,12 @@ import { PixelMessage } from './typings/events'
 // @ts-ignore
 declare var yotpoTrackConversionData: any
 
+declare global {
+  interface Window {
+    loading: any
+  }
+}
+
 export function handleEvents(e: PixelMessage) {
   switch (e.data.eventName) {
     case 'vtex:orderPlaced': {
