@@ -8,17 +8,18 @@ import { canUseDOM } from 'vtex.render-runtime'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
 import styles from './styles.css'
+import { refresh } from './utils'
 
-declare var global: {
+declare const global: {
   __hostname__: string
   __pathname__: string
 }
-declare var yotpo: any
+declare const yotpo: any
 
 window.loading = new Promise(function(resolve) {
   setTimeout(function() {
     resolve()
-  }, 100)
+  }, 1)
 })
 
 const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
@@ -27,14 +28,21 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     styles.ratingSummaryContainer,
     blockClass
   )
-  const [useRefId, setUseRefId] = useState(false)
+  const [useRefId, setUseRefId] = useState(null)
 
   useEffect(() => {
-    if (typeof yotpo != 'undefined' && yotpo.initialized && product)
-      setTimeout(function() {
-        yotpo.refreshWidgets()
-      }, 1000)
-  }, [product])
+    if (
+      typeof yotpo != 'undefined' &&
+      yotpo.initialized &&
+      product &&
+      useRefId !== null
+    ) {
+      // setTimeout(function() {
+      refresh()
+    }
+    // }, 1000)
+  }, [product, useRefId])
+
   useEffect(() => {
     window.loading.then(() => {
       setUseRefId(
@@ -44,7 +52,9 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
       )
     })
   }, [])
-  if (!product) return null
+
+  if (!product || useRefId === null) return null
+
   const getLocation = () =>
     canUseDOM
       ? {

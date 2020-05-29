@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Implemented debounce to streamline `refreshWidgets()` calls
+
 ## [1.1.4] - 2020-05-27
 
 ### Changed
@@ -14,7 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Enabling SSR components
 
 ## [1.1.3] - 2020-05-11
+
 ### Fixed
+
 - Stop doing private queries on SSR and avoid breaking SSR.
 
 ## [1.1.2] - 2020-04-28
