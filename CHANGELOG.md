@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.5] - 2020-05-29
+
 ### Changed
 
 - Implemented debounce to streamline `refreshWidgets()` calls
