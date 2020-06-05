@@ -1,0 +1,5 @@
+query AppSettings {
+  appSettings @context(provider: "vtex.yotpo") {
+    useRefId
+  }
+}

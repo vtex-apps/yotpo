@@ -1,10 +1,12 @@
 {
   "name": "yotpo",
   "vendor": "vtex",
-  "version": "1.1.5",
+  "version": "1.1.7-beta.1",
   "title": "Yotpo Integration",
   "description": "Integration of Yotpo reviews widget and conversion tracking",
   "builders": {
+    "graphql": "1.x",
+    "node": "4.x",
     "react": "3.x",
     "store": "0.x",
     "pixel": "0.x",

@@ -1,0 +1,21 @@
+{
+  "name": "node",
+  "version": "1.4.3",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "graphql": "^14.2.1"
+  },
+  "devDependencies": {
+    "@vtex/api": "^3.3.1",
+    "eslint": "^5.16.0",
+    "eslint-config-vtex": "^10.1.0",
+    "prettier": "^1.18.2",
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
