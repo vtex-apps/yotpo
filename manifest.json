@@ -30,7 +30,8 @@
       "useRefId": {
         "title": "Use Reference Id",
         "description": "Use reference Id rather than product id to link reviews to products",
-        "type": "boolean"
+        "type": "boolean",
+        "access": "public"
       }
     }
   },
