@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Uses settings from `appSettings` prop, which allows rendering on SSR.
+
+### Fixed
+- Issue where search engines were timing out before getting rich results data.
 
 ## [1.1.5] - 2020-05-29
 

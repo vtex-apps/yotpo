@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import React, { FunctionComponent, useContext, useEffect } from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductSummaryContext } from 'vtex.product-summary'
 import { ProductContext } from 'vtex.product-context'
@@ -24,13 +19,16 @@ window.loading = new Promise(function(resolve) {
   }, 1)
 })
 
-const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
+const RatingInline: FunctionComponent<BlockClass> = ({
+  blockClass,
+  appSettings,
+}: any) => {
   const { product }: ProductContext = useContext(ProductSummaryContext)
   const baseClassNames = generateBlockClass(
     styles.ratingInlineContainer,
     blockClass
   )
-  const [useRefId, setUseRefId] = useState(null)
+  const { useRefId } = appSettings
 
   useEffect(() => {
     if (
@@ -44,16 +42,6 @@ const RatingInline: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     }
     // }, 1000)
   }, [product, useRefId])
-
-  useEffect(() => {
-    window.loading.then(() => {
-      setUseRefId(
-        window?.yotpoApp?.useRefIdSetting
-          ? JSON.parse(window.yotpoApp.useRefIdSetting)
-          : false
-      )
-    })
-  }, [])
 
   if (!product || useRefId === null) return null
 

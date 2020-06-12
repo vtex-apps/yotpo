@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import React, { FunctionComponent, useContext, useEffect } from 'react'
 import { canUseDOM } from 'vtex.render-runtime'
 import { ProductContext } from 'vtex.product-context'
 import { generateBlockClass, BlockClass } from '@vtex/css-handles'
@@ -16,19 +11,16 @@ declare const global: {
 }
 declare const yotpo: any
 
-window.loading = new Promise(function(resolve) {
-  setTimeout(function() {
-    resolve()
-  }, 1)
-})
-
-const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
+const RatingSummary: FunctionComponent<BlockClass> = ({
+  blockClass,
+  appSettings,
+}: any) => {
   const { product }: ProductContext = useContext(ProductContext)
   const baseClassNames = generateBlockClass(
     styles.ratingSummaryContainer,
     blockClass
   )
-  const [useRefId, setUseRefId] = useState(null)
+  const { useRefId } = appSettings
 
   useEffect(() => {
     if (
@@ -42,16 +34,6 @@ const RatingSummary: FunctionComponent<BlockClass> = ({ blockClass }: any) => {
     }
     // }, 1000)
   }, [product, useRefId])
-
-  useEffect(() => {
-    window.loading.then(() => {
-      setUseRefId(
-        window?.yotpoApp?.useRefIdSetting
-          ? JSON.parse(window.yotpoApp.useRefIdSetting)
-          : false
-      )
-    })
-  }, [])
 
   if (!product || useRefId === null) return null
 
